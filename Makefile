@@ -1,5 +1,11 @@
+LIB = ch05_list
+INC = -I include
 
-here:
-	gcc -o bin/rec.o -I include -c src/ch03_recursion.c
-	gcc -o bin/main.o -I include -c src/main.c
-	gcc -o bin/main bin/*.o
+bin/main: bin/main.o bin/$(LIB).o
+	gcc -o $@ $^
+
+bin/main.o: src/main.c
+	gcc -o $@ $(INC) -c $^
+
+bin/$(LIB).o: src/$(LIB).c
+	gcc -o $@ $(INC) -c $^

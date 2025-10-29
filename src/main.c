@@ -1,32 +1,39 @@
 #include <stdio.h>
 
-#include "ch03_recursion.h"
+#include "ch05_list.h"
+
+void purge(void* v) {
+    int* p = (int*)v;
+    printf("Not really purging: %d\n", *p);
+}
 
 int main() {
 
-    int n = 10;
+    List list;
 
-    // factorial
-    int result;
+//    list_init(&list, NULL);
+    list_init(&list, purge);
+   
+    int a[3] = {0, 1, 2};
 
-    // normal recursion
-    result = factorial(n);
-    printf("Factorial of %d: %d\n", n, result);
+    printf("List size: %u\n", list_size(&list));
+    
+    for (int i = 0; i < 3; i++) {
+        list_insert(&list, NULL, a + i);
+        printf("List size: %u\n", list_size(&list));
+    }
+    
+    ListNode* run = list.head;
+    while (run) {
+        int* v = (int*)run->data;
+        printf(" %d", *v);
+        run = run->next;
+    }
+    printf("\n");
 
-    // tail recursion
-    result = factorial_tail(n, 1);
-    printf("Factorial of %d: %d\n", n, result);
+    run = NULL;
+    list_clear(&list);
 
-    // harmonic series
-    float harm;
-
-    // normal recursion
-    harm = harmonic_series(n);
-    printf("Harmonic series for %d: %f\n", n, harm);
-
-    // tail recursion
-    harm = harmonic_series_tail(n, 1);
-    printf("Harmonic series for %d: %f\n", n, harm);
-
+    return 0;
 }
 
