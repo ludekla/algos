@@ -9,4 +9,6 @@ float harmonic_series(int n);
 
 float harmonic_series_tail(int n, float a);
 
+int fibonacci(unsigned int n);
+
 #endif // CH03_RECURSION_H

@@ -28,5 +28,9 @@ int main() {
     harm = harmonic_series_tail(n, 1);
     printf("Harmonic series for %d: %f\n", n, harm);
 
+    int m = fibonacci(6);
+    printf("Fibonacci(6): %d\n", m);
+
+    return 0;
 }
 

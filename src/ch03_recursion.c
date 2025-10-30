@@ -27,3 +27,15 @@ float harmonic_series_tail(int n, float a) {
         return a;
     return harmonic_series_tail(n-1, a + 1.0 / n);
 }
+
+int fibonacci(unsigned int n) {
+    switch (n) {
+        case 0:
+            return 0;
+        case 1:
+            return 1;
+        default:
+            return fibonacci(n-2) + fibonacci(n-1);
+    }
+}   
+
