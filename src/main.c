@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "ch05_list.h"
+#include "ch06_stack.h"
 
 void purge(void* v) {
     int* p = (int*)v;
@@ -9,30 +10,33 @@ void purge(void* v) {
 
 int main() {
 
-    List list;
+    Stack stack;
 
-//    list_init(&list, NULL);
-    list_init(&list, purge);
+    stack_init(&stack, purge);
    
     int a[3] = {0, 1, 2};
 
-    printf("List size: %u\n", list_size(&list));
     
     for (int i = 0; i < 3; i++) {
-        list_insert(&list, NULL, a + i);
-        printf("List size: %u\n", list_size(&list));
+        int size = stack_size(&stack);
+        printf("Stack size before push: %u\n", size);
+        stack_push(&stack, a + i);
+        printf("Stack size after push: %u\n", stack_size(&stack));
     }
     
-    ListNode* run = list.head;
-    while (run) {
-        int* v = (int*)run->data;
-        printf(" %d", *v);
-        run = run->next;
+    int* data;
+    
+    if ((data = (int*)stack_peek(&stack)) != NULL)
+        printf("Peek: %d\n", *data); 
+    
+    while ((stack_pop(&stack, (void**)&data) == 0)) {
+        int size = stack_size(&stack);
+        printf("Successfully popped: %d (size now: %u)\n", *data, size);
+        if ((data = (int*)stack_peek(&stack)) != NULL)
+            printf("Peek: %d\n", *data); 
     }
-    printf("\n");
 
-    run = NULL;
-    list_clear(&list);
+    stack_clear(&stack);
 
     return 0;
 }
