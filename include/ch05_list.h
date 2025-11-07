@@ -15,7 +15,7 @@ typedef struct {
     Node* head;
     Node* tail;
     void (*purge)(void* data);
-    void (*match)(const void* data1, const void* data2);
+    int (*match)(const void* data1, const void* data2);
 } List;
 
 void list_init(List* list, void (*purge)(void* data));

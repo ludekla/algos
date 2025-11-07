@@ -1,3 +1,5 @@
+#include <stdlib.h>
+
 #include "ch07_set.h"
 
 void set_init(Set* set, match_fn match, void (*purge)(void* data)) {
@@ -17,7 +19,7 @@ int set_insert(Set* set, void* data) {
 int set_remove(Set* set, void** data) {
     Node* prev = NULL;
     // while looking keep track of preceding node
-    for (Node* run = run->head; run; run = run->next) {
+    for (Node* run = set->head; run; run = run->next) {
         if (set->match(run->data, *data))
             return list_remove(set, prev, data);
         prev = run;
@@ -77,7 +79,7 @@ int set_difference(Set* setd, const Set* set1, const Set* set2) {
 
 #define set_size(set) ((set)->size)
 
-int set_is_member(Set* set, void* data) {
+int set_is_member(const Set* set, void* data) {
     for (Node* run = set->head; run; run = run->next) {
          if (set->match(run->data, data))
             return 1;
@@ -100,5 +102,3 @@ int set_is_equal(const Set* set1, const Set* set2) {
         return 0;
     return set_is_subset(set1, set2);
 }
-
-#endif
