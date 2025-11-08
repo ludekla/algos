@@ -1,7 +1,6 @@
 #ifndef SET_H
 #define SET_H
 
-#include "ch07_set.h"
 #include "ch05_list.h"
 
 typedef List Set;
