@@ -1,3 +1,11 @@
+/*
+*   This example is from the textbook
+*
+*   Cormen, Leiserson, Rivest & Stein: 
+*   Introduction to algorithms
+*   The MIT Press
+*
+*/
 #include <stdio.h>
 
 #include "ch07_set.h"
@@ -14,7 +22,7 @@ int match_subsets(const void* data1, const void* data2) {
 void set_print(Set* set) {
     printf("Set {");
     for (Node* run = set->head; run; run = run->next)
-        printf(" node: %d", *(int*)run->data);
+        printf(" %d", *(int*)run->data);
     printf(" }\n");
 }
 
@@ -30,34 +38,48 @@ int main() {
     Set set;
     set_init(&set, match_ints, NULL);
 
-    int a[6] = {0, 1, 2, 3, 4, 5};
-    insert_ints(&set, a, 6);
+    int a[12] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
+    insert_ints(&set, a, 12);
     printf("Set:\n");
     set_print(&set);
 
-    Set subsets[5]; 
-    
-    int small_fry[4][2] = {{0, 1}, {4, 5}, {3, 4}, {1, 2}};
-    for (int i = 0; i < 4; i++) {
+    Set subsets[6]; 
+    // prepare subsets
+    for (int i = 0; i < 6; i++)
         set_init(subsets + i, match_ints, NULL);
-        insert_ints(subsets + i, small_fry[i], 2);
-    }
+    
+    int s1[6] = {0, 1, 2, 3, 4, 5};
+    insert_ints(subsets, s1, 6);
 
-    int big[3] = {0, 1, 2};
-    set_init(subsets + 4, match_ints, NULL);
-    insert_ints(subsets + 4, big, 3);
+    int s2[4] = {4, 5, 7, 8};
+    insert_ints(subsets + 1, s2, 4);
+   
+    int s3[4] = {0, 3, 6, 9};
+    insert_ints(subsets + 2, s3, 4);
+
+    int s4[5] = {1, 4, 6, 7, 10};
+    insert_ints(subsets + 3, s4, 5);
+
+    int s5[4] = {2, 5, 8, 11};
+    insert_ints(subsets + 4, s5, 4);
+
+    int s6[2] = {9, 10};
+    insert_ints(subsets + 5, s6, 2);
 
     Set family;
     set_init(&family, match_subsets, NULL);
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         if (set_insert(&family, subsets + i) != 0)
             printf("Cannot insert subset %d\n", i + 1);
     }
     // have a look at the subsets
     printf("Subsets:\n");
-    for (Node* run = family.head; run; run = run->next)
+    int i = 0;
+    for (Node* run = family.head; run; run = run->next) {
+        printf("Set %d: ", ++i);
         set_print((Set*)run->data);
+    }
 
     Set cover;
     if (greedy_cover(&set, &family, &cover) != 0)
@@ -68,7 +90,7 @@ int main() {
         set_print(run->data);
 
     // clean up (not necessary, no heap alloc)
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 6; i++)
         set_clear(subsets + i);
     set_clear(&set);
 
