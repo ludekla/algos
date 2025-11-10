@@ -1,9 +1,8 @@
 /*
 *   This example is from the textbook
 *
-*   Cormen, Leiserson, Rivest & Stein: 
-*   Introduction to algorithms
-*   The MIT Press
+*   Cormen, Leiserson, Rivest & Stein: Introduction to Algorithms
+*   The MIT Press, 2022, 4th edition
 *
 */
 #include <stdio.h>
