@@ -5,9 +5,7 @@
 
 typedef List Set;
 
-typedef int (*match_fn)(const void* data1, const void* data2);
-
-void set_init(Set* set, match_fn match, void (*purge)(void* data));
+void set_init(Set* set, match_fn match, purge_fn purge); 
 
 int set_insert(Set* set, void* data);
 

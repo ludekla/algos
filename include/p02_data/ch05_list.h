@@ -1,6 +1,10 @@
 #ifndef LIST_H
 #define LIST_H
 
+typedef int (*match_fn)(const void* key1, const void* key2);
+
+typedef void (*purge_fn)(void* data);
+
 // List node
 struct Node_ {
     void* data;
@@ -14,8 +18,8 @@ typedef struct {
     unsigned int size;
     Node* head;
     Node* tail;
-    void (*purge)(void* data);
-    int (*match)(const void* data1, const void* data2);
+    match_fn match;  // needed by other structures
+    purge_fn purge;
 } List;
 
 void list_init(List* list, void (*purge)(void* data));

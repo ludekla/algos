@@ -3,11 +3,7 @@
 
 #include "ch05_list.h"
 
-typedef int (*match_fn)(const void* key1, const void* key2);
-
 typedef int (*hash_fn)(const void* key);
-
-typedef void (*purge_fn)(void* data);
 
 typedef struct {
     int size;
@@ -26,6 +22,8 @@ int chtable_init(
 ); 
 
 int chtable_insert(CHTable* tb, void* data);
+
+int chtable_lookup(CHTable* tb, void* data);
 
 int chtable_remove(CHTable* tb, void* data);
 

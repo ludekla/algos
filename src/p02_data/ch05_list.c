@@ -3,7 +3,7 @@
 
 #include "ch05_list.h"
 
-void list_init(List* list, void (*purge)(void* data)) {
+void list_init(List* list, purge_fn purge) {
     list->size = 0;
     list->head = list->tail = NULL;
     list->purge = purge;

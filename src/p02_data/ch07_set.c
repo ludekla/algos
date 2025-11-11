@@ -2,7 +2,7 @@
 
 #include "ch07_set.h"
 
-void set_init(Set* set, match_fn match, void (*purge)(void* data)) {
+void set_init(Set* set, match_fn match, purge_fn purge) {
     list_init(set, purge);
     set->match = match;
 }
