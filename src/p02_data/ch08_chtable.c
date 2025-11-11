@@ -34,6 +34,7 @@ int chtable_insert(CHTable* tb, void* data) {
     if (list_insert(bucket, NULL, data) != 0)
          // sth went wrong
          return -1;
+    tb->size++;
     return 0;
 }
 
@@ -55,22 +56,24 @@ int chtable_remove(CHTable* tb, void* data) {
     List* bucket = tb->buckets + bucket_idx; 
     // visit the bucket 
     Node* prev = NULL;
+    void* key;
     for (Node* run = bucket->head; run; run = run->next) {
-        if (!tb->match(run->data, data))
-            continue;
-        // found
-        if (list_remove(bucket, prev, &data) != 0)
-            // sth went wrong
-            return -1;
+        if (tb->match(run->data, data)) {
+            if (list_remove(bucket, prev, &key) != 0)
+                // sth went wrong
+                return -1;
+            tb->size--;
+            return 0;
+        }
+        prev = run;
     }
-    tb->size--;
-    return 0;
+    // not found
+    return 1;
 }
 
 void chtable_clear(CHTable* tb) {
     for (int i = 0; i < tb->n_buckets; i++)
         list_clear(tb->buckets + i);
     free(tb->buckets);
-    tb->size = 0;
     memset(tb, 0, sizeof(CHTable));
 }
