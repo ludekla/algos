@@ -77,3 +77,15 @@ void bitree_clear(BiTree* tree) {
     bitree_rmleft(tree, NULL);
     memset(tree, 0, sizeof(BiTree));
 }
+
+int bitree_merge(BiTree* tree, BiTree* left, BiTree* right, void* data) {
+    bitree_init(tree, left->purge);
+    // allocate space for a root
+    if (bitree_insleft(tree, NULL, data) != 0)
+        return -1;
+    tree->root->left = left->root;
+    tree->root->right = right->root;
+    left->root = right->root = NULL;
+    tree->size = 1 + left->size + right->size;
+    return 0;
+}

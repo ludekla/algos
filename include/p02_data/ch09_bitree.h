@@ -31,6 +31,8 @@ void bitree_rmright(BiTree* tree, BiTreeNode* node);
 
 void bitree_clear(BiTree* tree);
 
+int bitree_merge(BiTree* tree, BiTree* left, BiTree* right, void* data);
+
 #define bitree_size(tree) ((tree)->size)
 
 #define bitree_is_leaf(node) ((node)->left == NULL &&  (node)->right == NULL) 
