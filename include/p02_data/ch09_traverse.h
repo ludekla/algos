@@ -6,10 +6,10 @@
 #include "ch05_list.h"
 #include "ch09_bitree.h"
 
-int preorder(BiTreeNode* node, List* list);
+int preorder(TreeNode* node, List* list);
 
-int inorder(BiTreeNode* node, List* list);
+int inorder(TreeNode* node, List* list);
 
-int postorder(BiTreeNode* node, List* list);
+int postorder(TreeNode* node, List* list);
 
 #endif

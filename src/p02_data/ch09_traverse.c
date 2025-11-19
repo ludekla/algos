@@ -1,6 +1,6 @@
 #include "ch09_traverse.h"
 
-int preorder(BiTreeNode* node, List* list) {
+int preorder(TreeNode* node, List* list) {
     if (node == NULL)
         return 0;
     if (list_insert(list, list->tail, node->data) != 0)
@@ -12,7 +12,7 @@ int preorder(BiTreeNode* node, List* list) {
     return 0;
 }
 
-int inorder(BiTreeNode* node, List* list) {
+int inorder(TreeNode* node, List* list) {
     if (node == NULL)
         return 0;
     if (node->left != NULL && inorder(node->left, list) != 0)
@@ -24,7 +24,7 @@ int inorder(BiTreeNode* node, List* list) {
     return 0;
 }
 
-int postorder(BiTreeNode* node, List* list) {
+int postorder(TreeNode* node, List* list) {
     if (node == NULL)
         return 0;
     if (node->left != NULL && postorder(node->left, list) != 0)
