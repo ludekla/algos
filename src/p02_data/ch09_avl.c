@@ -1,11 +1,11 @@
 #include "ch09_avl.h"
 
 avl_f avl_get(TreeNode* node) {
-    return ((*Avl)node->data)->factor;
+    return ((Avl*)node->data)->factor;
 }
 
 void avl_set(TreeNode* node, avl_f factor) {
-    ((*Avl)node->data)->factor = factor;
+    ((Avl*)node->data)->factor = factor;
 }
 
 void rotate_left(TreeNode** node) {
@@ -65,7 +65,7 @@ void rotate_right(TreeNode** node) {
         // update balance factors
         switch (avl_get(grandchild)) {
             case BALANCED:
-                avl_set(left, BALANCED);
+                avl_set(right, BALANCED);
                 avl_set(*node, BALANCED);
                 break;
             case LFT_HEAVY:

@@ -20,8 +20,8 @@ avl_f avl_get(TreeNode* node);
 
 void avl_set(TreeNode* node, avl_f factor);
 
-void rotate_left(TreeNode* node); 
+void rotate_left(TreeNode** node); 
 
-void rotate_right(TreeNode* node); 
+void rotate_right(TreeNode** node); 
 
 #endif
