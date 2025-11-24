@@ -1,6 +1,10 @@
 #ifndef BITREE_H
 #define BITREE_H
 
+typedef void (*purge_f)(void* data);
+
+typedef int (*compare_f)(const void* key1, const void* key2); 
+
 struct TreeNode_ {
     void* data;
     struct TreeNode_* left;
@@ -13,13 +17,13 @@ typedef struct {
     int size;
     TreeNode* root;
     // function pointers
-    void (*purge)(void* data);
-    int (*compare)(const void* key1, const void* key2); 
+    purge_f purge;
+    compare_f compare;
 } BiTree;
 
 TreeNode* bitree_node_new(void* data);
 
-void bitree_init(BiTree* tree, void (*purge)(void*));
+void bitree_init(BiTree* tree, purge_f purge);
 
 int bitree_insleft(BiTree* tree, TreeNode* node, void* data);
 

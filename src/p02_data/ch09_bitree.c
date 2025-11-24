@@ -12,7 +12,7 @@ TreeNode* bitree_node_new(void* data) {
     return new_node;
 }
 
-void bitree_init(BiTree* tree, void (*purge)(void*)) {
+void bitree_init(BiTree* tree, purge_f purge) {
     tree->size = 0;
     tree->root = NULL;
     tree->purge = purge;

@@ -14,14 +14,21 @@ typedef enum {
 typedef struct {
     void* data;
     avl_f factor;
+    int hidden;
 } Avl;
 
-avl_f avl_get(TreeNode* node);
+void avl_init(Avl* avl, avl_f factor, int hidden, const void* data);
 
-void avl_set(TreeNode* node, avl_f factor);
+#define avl_factor_get(node) (((Avl*)(node)->data)->factor)
 
-void rotate_left(TreeNode** node); 
+#define avl_factor_set(node, val) (((Avl*)(node)->data)->factor = (val))
 
-void rotate_right(TreeNode** node); 
+#define avl_data_get(node) (((Avl*)(node)->data)->data)
+
+#define avl_data_set(node, val) (((Avl*)(node)->data)->data = (void*)(val))
+
+#define avl_hidden_get(node) (((Avl*)(node)->data)->hidden)
+
+#define avl_hidden_set(node, val) (((Avl*)(node)->data)->hidden = (val))
 
 #endif
